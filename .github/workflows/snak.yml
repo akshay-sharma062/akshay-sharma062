@@ -2,7 +2,7 @@ name: Generate Snake Animation
 
 on:
   schedule:
-    - cron: "0 0 * * *" # every day at midnight
+    - cron: "0 0 * * *" # every day
   workflow_dispatch:
 
 jobs:
@@ -20,4 +20,5 @@ jobs:
         with:
           target_branch: output
           build_dir: dist
-          personal_token: ${{ secrets.PAT }}   # <-- FIXED HERE
+        env:
+          GH_PAT: ${{ secrets.PAT }}   # Use 'GH_PAT', NOT 'GITHUB_TOKEN' or 'personal_token'
