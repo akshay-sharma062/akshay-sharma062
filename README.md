@@ -24,3 +24,5 @@
 <p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=akshay-sharma062&show_icons=true&locale=en" alt="akshay-sharma062" /></p>
 
 <p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=akshay-sharma062&" alt="akshay-sharma062" /></p>
+![Snake animation](https://github.com/akshay-sharma062/akshay-sharma062/blob/output/github-contribution-grid-snake.svg)
+
