@@ -1,23 +1,37 @@
-name: Generate Snake Animation
+name: Generate Snake Contribution Animation
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # every day
-  workflow_dispatch:
+    - cron: '0 0 * * *'  # Runs every day at midnight
+  workflow_dispatch:     # Allows manual trigger from GitHub UI
 
 jobs:
-  generate:
+  generate-snake:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: Platane/snk@v3
+      # Checkout the repository to access files
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Generate the Snake animation SVG using Platane's action
+      - name: Generate GitHub Contribution Snake
+        uses: Platane/snk@v3
         with:
           github_user_name: akshay-sharma062
           outputs: |
             dist/github-contribution-grid-snake.svg
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+            dist/github-contribution-grid-snake.gif?color_snake=orange&color_dots=#64a1f4,#8dbdff,#bfd6f6
 
-      - name: Push Snake SVG to the output branch
-        uses: ad-m/github-push-action@master
+      # List the generated files for verification
+      - name: List generated files
+        run: ls -la dist
+
+      # Deploy the generated SVGs to the 'output' branch (commonly used for GitHub Pages)
+      - name: Deploy Snake SVG to output branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.PAT }}   # ✅ Correct token usage
-          branch: output                     # ✅ or master/main as needed
-          directory: dist                    # where your snake SVG is saved
+          github_token: ${{ secrets.PAT }}   # Use your Personal Access Token (PAT)
+          publish_dir: dist                 # Directory containing generated files
+          publish_branch: output            # Branch to push files to
